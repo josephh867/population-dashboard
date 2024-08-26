@@ -8,7 +8,7 @@ import plotly.express as px
 #######################
 # Page configuration
 st.set_page_config(
-    page_title="US Population Dashboard",
+    page_title="Retailyze Dashboard Mockup",
     page_icon="🏂",
     layout="wide",
     initial_sidebar_state="expanded")
@@ -24,7 +24,7 @@ df_reshaped = pd.read_csv('data/us-population-2010-2019-reshaped.csv')
 #######################
 # Sidebar
 with st.sidebar:
-    st.title('🏂 US Population Dashboard')
+    st.title('Retailyze Dashboard Mockup')
     
     year_list = list(df_reshaped.year.unique())[::-1]
     
@@ -164,7 +164,7 @@ with col[0]:
     st.metric(label=last_state_name, value=last_state_population, delta=last_state_delta)
 
     
-    st.markdown('#### States Migration')
+    st.markdown('#### Store Performance')
 
     if selected_year > 2010:
         # Filter states with population difference > 50000
@@ -185,13 +185,13 @@ with col[0]:
 
     migrations_col = st.columns((0.2, 1, 0.2))
     with migrations_col[1]:
-        st.write('Inbound')
+        st.write('Best Lift %')
         st.altair_chart(donut_chart_greater)
-        st.write('Outbound')
+        st.write('Worst Lift %')
         st.altair_chart(donut_chart_less)
 
 with col[1]:
-    st.markdown('#### Total Population')
+    st.markdown('#### Total Lift Per State')
     
     choropleth = make_choropleth(df_selected_year, 'states_code', 'population', selected_color_theme)
     st.plotly_chart(choropleth, use_container_width=True)
